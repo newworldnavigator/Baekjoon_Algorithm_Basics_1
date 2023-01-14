@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import java.util.Stack;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int repeat = Integer.parseInt(br.readLine());
+		Stack<Integer> intStack = new Stack<Integer>();
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0; i < repeat; i ++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			String method = st.nextToken();
+			
+			if (method.equals("push")) {
+				int tempInt = Integer.parseInt(st.nextToken());
+				intStack.push(tempInt);
+			}
+			if (method.equals("top")) {
+				if (intStack.empty() != true) {
+					sb.append(intStack.peek()).append("\n");
+				} else {
+					sb.append(-1).append("\n");
+				}
+			}
+			if (method.equals("size")) {
+				sb.append(intStack.size()).append("\n");
+			}
+			if (method.equals("empty")) {
+				if (intStack.empty() == true) {
+					sb.append(1).append("\n");
+				} else {
+					sb.append(0).append("\n");
+				}
+			}
+			if (method.equals("pop")) {
+				if (intStack.empty() != true) {
+					sb.append(intStack.pop()).append("\n");
+				} else {
+					sb.append(-1).append("\n");
+				}
+			}
+		}
+		System.out.println(sb);
+	}
+}
