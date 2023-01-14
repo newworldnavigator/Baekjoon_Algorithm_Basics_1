@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Stack;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int repeat = Integer.parseInt(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		
+		int currentInt = 0;
+		Stack<Integer> stackInt = new Stack<Integer>();
+		for (int i = 0; i < repeat; i ++) {
+			int targetInt = Integer.parseInt(br.readLine());
+			
+			while (currentInt < targetInt) {
+				currentInt ++;
+				stackInt.add(currentInt);
+				sb.append("+\n");
+			}
+			if (stackInt.peek() == targetInt) {
+				sb.append("-\n");
+				stackInt.pop();
+			}
+		}
+		if (stackInt.empty() == false) {
+			System.out.println("NO");
+		} else {
+			System.out.println(sb);
+		}
+	}
+}
