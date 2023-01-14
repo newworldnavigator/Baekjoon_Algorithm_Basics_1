@@ -1,0 +1,42 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int repeat = Integer.parseInt(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0; i < repeat; i ++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			ArrayList<String> stringList = new ArrayList<String>();
+			
+			while (st.hasMoreTokens() == true) {
+				stringList.add(st.nextToken());
+			}
+			int wordCount = stringList.size();
+			
+			for (int j = 0; j < wordCount; j ++) {
+				String tempWord = stringList.get(j);
+				int length = tempWord.length();
+				
+				ArrayList<Character> charList = new ArrayList<Character>();
+				for (int k = 0; k < length; k ++) {
+					charList.add(tempWord.charAt(k));
+				}
+				
+				Collections.reverse(charList);
+				StringBuilder tempSb = new StringBuilder();
+				for (int k = 0; k < length; k ++) {
+					tempSb.append(charList.get(k));
+				}
+				sb.append(tempSb).append(" ");
+			}
+			sb.append("\n");
+		}
+		System.out.println(sb);
+	}
+}
