@@ -1,0 +1,41 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int repeat = Integer.parseInt(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0; i < repeat; i ++) {
+			String tempString = br.readLine();
+			
+			int tempLength = tempString.length();
+			ArrayList<Character> charList = new ArrayList<Character>();
+			for (int j = 0; j < tempLength; j ++) {
+				charList.add(tempString.charAt(j));
+			}
+			
+			int countLeft = 0;
+			int countRight = 0;
+			for (char j : charList) {
+				if (j == '(') {
+					countLeft ++;
+				} else if (j == ')') {
+					countRight ++;
+					if (countRight > countLeft) {
+						break;
+					}
+				}
+			}
+			
+			if (countLeft == countRight) {
+				sb.append("YES").append("\n");
+			} else {
+				sb.append("NO").append("\n");
+			}
+		}
+		System.out.println(sb);
+	}
+}
