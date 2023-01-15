@@ -1,0 +1,39 @@
+import java.io.BufferedReader; 
+import java.io.InputStreamReader; 
+import java.util.StringTokenizer;
+import java.util.Queue;
+import java.util.LinkedList;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int repeat = Integer.parseInt(br.readLine());
+		StringBuilder sb = new StringBuilder();
+		Queue<Integer> intQueue = new LinkedList<Integer>();
+		int lastNum = 0;
+		
+		for (int i = 0; i < repeat; i ++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			String command = st.nextToken();
+			if (command.equals("pop")) {
+				if (intQueue.isEmpty() == false) sb.append(intQueue.poll()).append("\n");
+				else sb.append(-1).append("\n");
+			} else if (command.equals("size")) {
+				sb.append(intQueue.size()).append("\n");
+			} else if (command.equals("empty")) {
+				if (intQueue.isEmpty() == true) sb.append(1).append("\n");
+				else sb.append(0).append("\n");
+			} else if (command.equals("front")) {
+				if (intQueue.isEmpty() == false) sb.append(intQueue.peek()).append("\n");
+				else sb.append(-1).append("\n");
+			} else if (command.equals("back")) {
+				if (intQueue.isEmpty() == false) sb.append(lastNum).append("\n");
+				else sb.append(-1).append("\n");
+			} else if (command.equals("push")) {
+				lastNum = Integer.parseInt(st.nextToken());
+				intQueue.add(lastNum);
+			}
+		}
+		System.out.println(sb);
+	}
+}
