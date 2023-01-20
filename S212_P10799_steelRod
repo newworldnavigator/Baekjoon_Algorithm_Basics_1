@@ -1,0 +1,31 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String arrangement = br.readLine();
+		
+		int arrangementLength = arrangement.length();
+		ArrayList<Character> charList = new ArrayList<Character>();
+		for (int i = 0; i < arrangementLength; i ++) {
+			charList.add(arrangement.charAt(i));
+		}
+		
+		int pieceCount = 0;
+		int rodStack = -1;
+		for (int i = 0; i < arrangementLength; i ++) {
+			if (charList.get(i) == '(') {
+				rodStack ++;
+			} else if (charList.get(i) == ')' && charList.get(i - 1) == '(') {
+				pieceCount += rodStack;
+				rodStack --;
+			} else if (charList.get(i) == ')' && charList.get(i - 1) == ')') {
+				pieceCount ++;
+				rodStack --;
+			}
+		}
+		System.out.println(pieceCount);
+	}
+}
