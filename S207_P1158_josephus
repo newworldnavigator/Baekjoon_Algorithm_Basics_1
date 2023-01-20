@@ -1,0 +1,41 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import java.util.ArrayList;
+
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int totalLength = Integer.parseInt(st.nextToken());
+		int leap = Integer.parseInt(st.nextToken());
+		ArrayList<Integer> totalList = new ArrayList<Integer>();
+		for (int i = 0; i < totalLength; i ++) {
+			totalList.add(i + 1);
+		}
+		ArrayList<Integer> execution = new ArrayList<Integer>();
+		StringBuilder sb = new StringBuilder();
+		
+		int location = leap;
+		while (totalList.isEmpty() == false) {
+			while (location > totalLength) {
+				location -= totalLength;
+			}
+			execution.add(totalList.get(location - 1));
+			totalList.remove(location - 1);
+			totalLength --;
+			location --;
+			location += leap;
+		}
+		sb.append("<");
+		for (int i : execution) {
+			sb.append(i);
+			sb.append(", ");
+		}
+		sb.deleteCharAt(sb.length() - 1);
+		sb.deleteCharAt(sb.length() - 1);
+		sb.append(">");
+		System.out.println(sb);
+	}
+}
