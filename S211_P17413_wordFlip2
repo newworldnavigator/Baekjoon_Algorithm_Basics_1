@@ -1,0 +1,58 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String target = br.readLine();
+		int targetLength = target.length();
+		ArrayList<Character> charList = new ArrayList<Character>();
+		ArrayList<Character> convertedList = new ArrayList<Character>();
+		StringBuilder sb = new StringBuilder();
+		
+		int between = 0;
+		for (int i = 0; i < targetLength; i ++) {
+			if (target.charAt(i) == '<') {
+				StringTokenizer tempSt = new StringTokenizer(sb.toString());
+				while (tempSt.hasMoreTokens() == true) {
+					String tempToken = tempSt.nextToken();
+					int tempTokenLength = tempToken.length();
+					for (int j = 0; j < tempTokenLength; j ++) {
+						charList.add(tempToken.charAt(tempTokenLength - 1 - j));
+					}
+					if (tempSt.hasMoreTokens() == true) {
+						charList.add(' ');
+					}
+					sb = new StringBuilder();
+				}
+				between = 1;
+			}
+			if (between == 1) {
+				charList.add(target.charAt(i));
+			} else {
+				sb.append(target.charAt(i));
+			}
+			if (target.charAt(i) == '>') {
+				between = 0;
+			}
+		}
+		StringTokenizer finalSt = new StringTokenizer(sb.toString());
+		while (finalSt.hasMoreTokens() == true) {
+			String finalToken = finalSt.nextToken();
+			int finalTokenLength = finalToken.length();
+			for (int j = 0; j < finalTokenLength; j ++) {
+				charList.add(finalToken.charAt(finalTokenLength - 1 - j));
+			}
+			if (finalSt.hasMoreTokens() == true) {
+				charList.add(' ');
+			}
+		}
+		sb = new StringBuilder();
+		for (char i : charList) {
+			sb.append(i);
+		}
+		System.out.println(sb);
+	}
+}
