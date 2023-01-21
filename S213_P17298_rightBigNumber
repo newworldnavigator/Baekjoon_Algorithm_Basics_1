@@ -1,0 +1,36 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int intCount = Integer.parseInt(br.readLine());
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		ArrayList<Integer> intList = new ArrayList<Integer>();
+		while (st.hasMoreTokens() == true) {
+			intList.add(Integer.parseInt(st.nextToken()));
+		}
+		LinkedList<Integer> intStack = new LinkedList<Integer>();
+		StringBuilder answer = new StringBuilder();
+		
+		intStack.add(0);
+		for (int i = 1; i < intCount; i ++) {
+			int tempInt = intList.get(i);
+			while (intStack.isEmpty() == false && tempInt > intList.get(intStack.peekLast())) {
+				intList.set(intStack.peekLast(), tempInt);
+				intStack.removeLast();
+			}
+			intStack.add(i);
+		}
+		for (int i : intStack) {
+			intList.set(i,  -1);
+		}
+		for (int i : intList) {
+			answer.append(i).append(" ");
+		}
+		System.out.println(answer);
+	}
+}
